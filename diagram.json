@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "author": "Angel Velasquez",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "upButton",
+      "top": 44.6,
+      "left": -96,
+      "attrs": { "color": "red", "label": "+"}
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "downButton",
+      "top": 102.2,
+      "left": -96,
+      "attrs": { "color": "blue", "label": "-"}
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht",
+      "top": 9.9,
+      "left": 148.2,
+      "attrs": { "temperature": "23.3", "humidity": "54.5" }
+    },
+    { "type": "wokwi-servo", "id": "airHandler", "top": 190, "left": 220.8, "attrs": {} },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd",
+      "top": -22.4,
+      "left": 284,
+      "attrs": { "pins": "i2c" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 176.75,
+      "left": 182.4,
+      "attrs": { "value": "10000" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "esp:GND.1", "upButton:1.l", "black", [ "h23.5", "v-158.6", "h-220.8" ] ],
+    [ "esp:D26", "upButton:2.r", "green", [ "h0" ] ],
+    [ "downButton:2.r", "esp:D27", "green", [ "h0" ] ],
+    [ "dht:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "dht:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "dht:SDA", "esp:D4", "blue", [ "v0" ] ],
+    [ "airHandler:GND", "esp:GND.1", "black", [ "h-28.8", "v-91" ] ],
+    [ "airHandler:V+", "esp:VIN", "red", [ "h-240", "v-91" ] ],
+    [ "airHandler:PWM", "esp:D13", "orange", [ "h-249.6", "v-119.5" ] ],
+    [ "lcd:GND", "esp:GND.1", "black", [ "h-48", "v144", "h-138.7" ] ],
+    [ "lcd:VCC", "esp:3V3", "red", [ "h-67.2", "v139.4" ] ],
+    [ "downButton:1.l", "esp:GND.2", "black", [ "h-9.6", "v38.4", "h110.6" ] ],
+    [ "lcd:SDA", "esp:D21", "orange", [ "h-19.2", "v77", "h-153.6", "v-42.7" ] ],
+    [ "r1:1", "dht:VCC", "gold", [ "h-38.4", "v-48" ] ],
+    [ "r1:2", "dht:SDA", "gold", [ "v0" ] ],
+    [ "lcd:SCL", "esp:D22", "purple", [ "h-9.6", "v-38.1", "h-163.2", "v34" ] ]
+  ],
+  "dependencies": {}
+}
